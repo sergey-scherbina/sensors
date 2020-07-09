@@ -6,10 +6,9 @@ import akka.actor.ActorSystem
 import akka.stream.Materializer
 import cats.implicits._
 import sensors.service.SensorsService
-import sensors.service.impl.SensorsImpl._
 
+import scala.concurrent.Await
 import scala.concurrent.duration.Duration
-import scala.concurrent.{Await, Future}
 
 object Sensors {
 

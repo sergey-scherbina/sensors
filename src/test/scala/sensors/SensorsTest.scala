@@ -6,9 +6,6 @@ import akka.actor.testkit.typed.scaladsl._
 import cats.implicits._
 import org.scalatest.funsuite._
 import sensors.service.SensorsService
-import sensors.service.impl.SensorsImpl._
-
-import scala.concurrent.Future
 
 class SensorsTest extends ScalaTestWithActorTestKit with AsyncFunSuiteLike {
 
