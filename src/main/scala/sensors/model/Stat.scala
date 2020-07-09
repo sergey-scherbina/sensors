@@ -14,13 +14,20 @@ object Stat {
        |Num of processed files: ${st.files}
        |Num of processed measurements: ${st.processed}
        |Num of failed measurements: ${st.failed}
-       |
-       |Sensors with highest avg humidity:
-       |
-       |sensor-id,min,avg,max
        |""".stripMargin +
-      st.stat.map(_.show).mkString("\n")
+      showData(st.stat)
   )
+
+  def showData(stat: List[OutputStat]): String = stat match {
+    case List() => ""
+    case _ =>
+      s"""
+         |Sensors with highest avg humidity:
+         |
+         |sensor-id,min,avg,max
+         |""".stripMargin +
+        stat.map(_.show).mkString("\n")
+  }
 
   def apply(st: Stat2): Stat = Stat(outputStat(st.stat),
     st.files, st.stat.processed, st.stat.failed)

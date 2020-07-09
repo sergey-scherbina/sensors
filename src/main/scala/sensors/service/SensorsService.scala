@@ -6,8 +6,9 @@ import akka.stream.Materializer
 import cats._
 import cats.implicits._
 import sensors.model._
+import sensors.service.impl.SensorsImpl._
 
-import scala.concurrent.ExecutionContext
+import scala.concurrent.{ExecutionContext, Future}
 
 trait SensorsService[F[_]] {
 
@@ -27,4 +28,6 @@ trait SensorsService[F[_]] {
 object SensorsService {
   @inline def apply[F[_] : SensorsService]: SensorsService[F] =
     implicitly[SensorsService[F]]
+
+  lazy val impl = SensorsService[Future]
 }

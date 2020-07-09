@@ -13,7 +13,7 @@ import scala.concurrent.{Await, Future}
 
 object Sensors {
 
-  lazy val sensors = SensorsService[Future]
+  lazy val sensors = SensorsService.impl
 
   object Path {
     def unapply(arg: Array[String]): Option[Path] = arg match {

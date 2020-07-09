@@ -14,7 +14,18 @@ class SensorsTest extends ScalaTestWithActorTestKit with AsyncFunSuiteLike {
 
   implicit val ec = testKit.system.executionContext
 
-  lazy val sensors = SensorsService[Future]
+  lazy val sensors = SensorsService.impl
+
+  test("empty") {
+    sensors(Paths.get("src/test/resources/empty/"))
+      .map(s => assert(s ==
+        """
+          |Num of processed files: 0
+          |Num of processed measurements: 0
+          |Num of failed measurements: 0
+          |"""
+          .stripMargin))
+  }
 
   test("data1") {
     sensors(Paths.get("src/test/resources/data1/"))
