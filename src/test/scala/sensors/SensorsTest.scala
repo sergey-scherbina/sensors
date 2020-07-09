@@ -16,17 +16,6 @@ class SensorsTest extends ScalaTestWithActorTestKit with AsyncFunSuiteLike {
 
   lazy val sensors = SensorsService.impl
 
-  test("empty") {
-    sensors(Paths.get("src/test/resources/empty/"))
-      .map(s => assert(s ==
-        """
-          |Num of processed files: 0
-          |Num of processed measurements: 0
-          |Num of failed measurements: 0
-          |"""
-          .stripMargin))
-  }
-
   test("data1") {
     sensors(Paths.get("src/test/resources/data1/"))
       .map(s => assert(s ==
@@ -43,4 +32,27 @@ class SensorsTest extends ScalaTestWithActorTestKit with AsyncFunSuiteLike {
           |s3,NaN,NaN,NaN"""
           .stripMargin))
   }
+
+  test("empty") {
+    sensors(Paths.get("src/test/resources/empty/"))
+      .map(s => assert(s ==
+        """
+          |Num of processed files: 0
+          |Num of processed measurements: 0
+          |Num of failed measurements: 0
+          |"""
+          .stripMargin))
+  }
+
+  test("wrong") {
+    sensors(Paths.get("src/test/resources/wrong/"))
+      .map(s => assert(s ==
+        """
+          |Num of processed files: 1
+          |Num of processed measurements: 0
+          |Num of failed measurements: 0
+          |"""
+          .stripMargin))
+  }
+
 }
